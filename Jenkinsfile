@@ -1,7 +1,7 @@
 
 pipeline {
     agent {
-        label 'base'
+        label 'golang'
     }
     stages {
         stage('checkout') {
@@ -15,8 +15,9 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    container('tools') {
-                        sh "docker ps -a" 
+                    container('golang') {
+                        sh "go build -o hello ." 
+                        sh "ls -lah"
                     }
                 }
             }
